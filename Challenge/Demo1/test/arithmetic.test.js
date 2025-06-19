@@ -149,53 +149,63 @@ describe('Arithmetic', function () {
         });
     });
 
-    // multiply test
-    describe('Multiplication', function () {
-        it('multiplies two positive integers', function (done) {
-            request.get('/arithmetic?operation=multiply&operand1=21&operand2=21')
+    // divide test
+    describe('Division', function () {
+        it('divides two positive integers', function (done) {
+            request.get('/arithmetic?operation=divide&operand1=21&operand2=21')
                 .expect(200)
                 .end(function (err, res) {
-                    expect(res.body).to.eql({result: 441});
+                    expect(res.body).to.eql({result: 1});
                     done();
                 });
         });
-        it('multiplies an integer by zero', function (done) {
-            request.get('/arithmetic?operation=multiply&operand1=42&operand2=0')
-                .expect(200)
+        it('divides an integer by zero', function (done) {
+            request.get('/arithmetic?operation=divide&operand1=42&operand2=0')
+                .expect(400)
                 .end(function (err, res) {
-                    expect(res.body).to.eql({result: 0});
+                    expect(res.body).to.eql({error: "Division by zero is not allowed"});
                     done();
                 });
         });
-        it('multiplies a negative integer by a positive integer', function (done) {
-            request.get('/arithmetic?operation=multiply&operand1=21&operand2=-42')
+        it('divides a negative integer by a positive integer', function (done) {
+            request.get('/arithmetic?operation=divide&operand1=-21&operand2=7')
                 .expect(200)
                 .end(function (err, res) {
-                    expect(res.body).to.eql({result: -882});
+                    expect(res.body).to.eql({result: -3});
                     done();
                 });
         });
-        it('multiplies two negative integers', function (done) {
-            request.get('/arithmetic?operation=multiply&operand1=-21&operand2=-21')
+        it('divides two negative integers', function (done) {
+            request.get('/arithmetic?operation=divide&operand1=-21&operand2=-7')
                 .expect(200)
                 .end(function (err, res) {
-                    expect(res.body).to.eql({result: 441});
+                    expect(res.body).to.eql({result: 3});
                     done();
                 });
         });
-        it('multiplies an integer by a floating point number', function (done) {
-            request.get('/arithmetic?operation=multiply&operand1=2.5&operand2=-5')
+        it('divides an integer by a floating point number', function (done) {
+            request.get('/arithmetic?operation=divide&operand1=5&operand2=2.5')
                 .expect(200)
                 .end(function (err, res) {
-                    expect(res.body).to.eql({result: -12.5});
+                    expect(res.body).to.eql({result: 2});
                     done();
                 });
         });
-        it('multiplies with negative exponent', function (done) {
-            request.get('/arithmetic?operation=multiply&operand1=1.2e-5&operand2=-1.2e-5')
+        it('divides with negative exponent', function (done) {
+            request.get('/arithmetic?operation=divide&operand1=1.2e-5&operand2=-1.2e-5')
                 .expect(200)
                 .end(function (err, res) {
-                    expect(res.body).to.eql({result: -1.44e-10});
+                    expect(res.body).to.eql({result: -1});
+                    done();
+                });
+        });
+
+        // division equal to floating point number
+        it('divides two floating point numbers', function (done) {
+            request.get('/arithmetic?operation=divide&operand1=8&operand2=3')
+                .expect(200)
+                .end(function (err, res) {
+                    expect(res.body).to.eql({result: 2.667});
                     done();
                 });
         });

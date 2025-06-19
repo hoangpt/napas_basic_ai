@@ -47,13 +47,19 @@ exports.calculate = function(req, res) {
       'add':      function(a, b) { return Number(a) + Number(b) },
       'subtract': function(a, b) { return Number(a) - Number(b) },
       'multiply': function(a, b) { return Number(a) * Number(b) },
-      'divide':   function(a, b) { return Number(a) / Number(b) }
+      'divide':   function(a, b) { 
+        if (Number(b) === 0) {
+          throw new Error("Division by zero is not allowed");
+        }
+        return Number(a) / Number(b); 
+      }
     };
 
     var operation = operations[req.query.operation];
     if (!operation) {
       throw new Error("Invalid operation: " + req.query.operation);
     }
+
 
   res.json({ result: operation(req.query.operand1, req.query.operand2) });
 };

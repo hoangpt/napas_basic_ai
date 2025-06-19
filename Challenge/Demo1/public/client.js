@@ -33,7 +33,6 @@ function calculate(operand1, operand2, operation) {
         case '/':
             uri += "?operation=divide";
             break;
-
         default:
             setError();
             return;
