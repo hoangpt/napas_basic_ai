@@ -48,18 +48,18 @@ describe('Arithmetic', function () {
     // add test
     describe('Addition', function () {
         it('adds two positive integers', function (done) {
-            request.get('/arithmetic?operation=add&operand1=21&operand2=21')
+            request.get('/arithmetic?operation=add&operand1=1&operand2=1')
                 .expect(200)
                 .end(function (err, res) {
-                    expect(res.body).to.eql({result: 42});
+                    expect(res.body).to.eql({result: 2});
                     done();
                 });
         });
-        it('adds zero to an integer', function (done) {
-            request.get('/arithmetic?operation=add&operand1=42&operand2=0')
+        it('adds zero to zero', function (done) {
+            request.get('/arithmetic?operation=add&operand1=0&operand2=0')
                 .expect(200)
                 .end(function (err, res) {
-                    expect(res.body).to.eql({result: 42});
+                    expect(res.body).to.eql({result: 0});
                     done();
                 });
         });
@@ -72,18 +72,18 @@ describe('Arithmetic', function () {
                 });
         });
         it('adds two negative integers', function (done) {
-            request.get('/arithmetic?operation=add&operand1=-21&operand2=-21')
+            request.get('/arithmetic?operation=add&operand1=-1&operand2=-')
                 .expect(200)
                 .end(function (err, res) {
-                    expect(res.body).to.eql({result: -42});
+                    expect(res.body).to.eql({result: -2});
                     done();
                 });
         });
         it('adds an integer to a floating point number', function (done) {
-            request.get('/arithmetic?operation=add&operand1=2.5&operand2=-5')
+            request.get('/arithmetic?operation=add&operand1=-0.1&operand2=-0.2')
                 .expect(200)
                 .end(function (err, res) {
-                    expect(res.body).to.eql({result: -2.5});
+                    expect(res.body).to.eql({result: -0.3});
                     done();
                 });
         });

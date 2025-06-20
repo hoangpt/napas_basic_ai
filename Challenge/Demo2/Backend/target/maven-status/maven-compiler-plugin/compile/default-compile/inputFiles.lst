@@ -1,0 +1,13 @@
+D:\Training\napas_basic_ai\Challenge\Demo2\src\main\java\com\task\domain\TaskStatus.java
+D:\Training\napas_basic_ai\Challenge\Demo2\src\main\java\com\task\controller\TaskController.java
+D:\Training\napas_basic_ai\Challenge\Demo2\src\main\java\com\task\domain\Priority.java
+D:\Training\napas_basic_ai\Challenge\Demo2\src\main\java\com\task\service\TaskService.java
+D:\Training\napas_basic_ai\Challenge\Demo2\src\main\java\com\task\domain\Reminder.java
+D:\Training\napas_basic_ai\Challenge\Demo2\src\main\java\com\task\repository\TaskRepository.java
+D:\Training\napas_basic_ai\Challenge\Demo2\src\main\java\com\task\dto\CommentDTO.java
+D:\Training\napas_basic_ai\Challenge\Demo2\src\main\java\com\task\TaskManagementApplication.java
+D:\Training\napas_basic_ai\Challenge\Demo2\src\main\java\com\task\domain\Task.java
+D:\Training\napas_basic_ai\Challenge\Demo2\src\main\java\com\task\domain\Comment.java
+D:\Training\napas_basic_ai\Challenge\Demo2\src\main\java\com\task\exception\GlobalExceptionHandler.java
+D:\Training\napas_basic_ai\Challenge\Demo2\src\main\java\com\task\dto\TaskDTO.java
+D:\Training\napas_basic_ai\Challenge\Demo2\src\main\java\com\task\dto\ReminderDTO.java

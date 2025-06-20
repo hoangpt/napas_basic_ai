@@ -51,6 +51,15 @@ exports.calculate = function(req, res) {
         if (Number(b) === 0) {
           throw new Error("Division by zero is not allowed");
         }
+
+        // make round of results that have 3 decimal places
+        var result = Number(a) / Number(b);
+        if (result.toString().indexOf('.') !== -1) {
+          var parts = result.toString().split('.');
+          if (parts[1].length > 3) {
+            result = parseFloat(result.toFixed(3));
+          }
+        }  
         return Number(a) / Number(b); 
       }
     };

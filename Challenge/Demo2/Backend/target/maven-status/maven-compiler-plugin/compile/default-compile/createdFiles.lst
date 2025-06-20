@@ -1,0 +1,13 @@
+com\task\service\TaskService.class
+com\task\TaskManagementApplication.class
+com\task\domain\TaskStatus.class
+com\task\domain\Reminder.class
+com\task\repository\TaskRepository.class
+com\task\dto\CommentDTO.class
+com\task\dto\TaskDTO.class
+com\task\dto\ReminderDTO.class
+com\task\controller\TaskController.class
+com\task\domain\Task.class
+com\task\domain\Comment.class
+com\task\exception\GlobalExceptionHandler.class
+com\task\domain\Priority.class

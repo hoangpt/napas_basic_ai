@@ -1,0 +1,48 @@
+{
+  "tasks": [
+    {
+      "id": "1",
+      "title": "Implement User Authentication",
+      "description": "Add user login and registration functionality using JWT",
+      "status": "inprogress",
+      "deadline": "2025-07-01T00:00:00Z",
+      "assignee": "john.doe",
+      "createdBy": "admin",
+      "project": "Authentication",
+      "labels": ["frontend", "security"],
+      "priority": "high",
+      "comments": [
+        {
+          "id": "c1",
+          "content": "Started working on the login form",
+          "createdAt": "2025-06-18T10:00:00Z",
+          "createdBy": "john.doe"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Design Dashboard Layout",
+      "description": "Create a responsive dashboard layout with Bootstrap",
+      "status": "todo",
+      "deadline": "2025-06-25T00:00:00Z",
+      "assignee": "jane.smith",
+      "createdBy": "admin",
+      "project": "UI/UX",
+      "labels": ["design", "frontend"],
+      "priority": "medium"
+    },
+    {
+      "id": "3",
+      "title": "Fix Navigation Bug",
+      "description": "Fix the navigation menu not working on mobile devices",
+      "status": "done",
+      "deadline": "2025-06-15T00:00:00Z",
+      "assignee": "john.doe",
+      "createdBy": "jane.smith",
+      "project": "Bug Fixes",
+      "labels": ["bug", "mobile"],
+      "priority": "high"
+    }
+  ]
+}

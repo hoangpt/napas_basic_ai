@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Things - Mobile Task Manager Prototype</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap 5 CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- UIkit CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.17.12/dist/css/uikit.min.css" />
+  <style>
+    body {
+      background: linear-gradient(180deg, #e7ecf3 0%, #cfd8ec 100%);
+      min-height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .card-glass {
+      background: rgba(255,255,255,0.99);
+      border-radius: 24px;
+      box-shadow: 0 8px 24px 0 rgba(44,62,80,0.07);
+      overflow: hidden;
+    }
+    .header-img {
+      height: 140px;
+      background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
+      position: relative;
+    }
+    .header-overlay {
+      background: linear-gradient(180deg,rgba(60,80,120,0.45),rgba(40,60,110,.8));
+      position: absolute;
+      top:0;left:0;right:0;bottom:0;
+      color: #fff;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .header-title {
+      font-size: 2rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 0.25rem;
+    }
+    .header-detail {
+      font-size: .95rem;
+      opacity: .9;
+      margin-bottom: 0.4rem;
+    }
+    .stats {
+      font-size: .95rem;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    .stats span {
+      font-weight: 500;
+    }
+    .progress-bar {
+      height: 5px;
+      border-radius: 3px;
+      background: #b0c4e8;
+    }
+    .progress-bar-inner {
+      height: 100%;
+      background: #67d6ff;
+      border-radius: 3px;
+      width: 65%;
+      transition: width .4s;
+    }
+    .inbox-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .inbox-list li {
+      display: flex;
+      align-items: center;
+      padding: 18px 0 12px 0;
+      border-bottom: 1px solid #eef1f7;
+    }
+    .inbox-list li:last-child {border-bottom: none;}
+    .task-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #e6f1fb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 14px;
+      font-size: 1.3em;
+      color: #388ee7;
+    }
+    .task-title { font-weight: 500; font-size: 1.05em}
+    .task-desc { font-size: .92em; color: #8a99b5;}
+    .task-time { margin-left: auto; font-size: .98em; color: #6690b8;}
+    .avatar-group {
+      display: flex;
+      gap: -10px;
+      margin-left: 8px;
+    }
+    .avatar {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      object-fit: cover;
+      box-shadow: 0 1px 3px #cfe4ff52;
+    }
+    .fab {
+      position: absolute;
+      bottom: -28px;
+      right: 20px;
+      background: #45c9f6;
+      color: #fff;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.25em;
+      box-shadow: 0 4px 18px #3dc4f670;
+      border: none;
+      transition: background .2s;
+      z-index: 2;
+    }
+    .fab:active {background: #2bb2e6;}
+    /* Modal (Add Task) */
+    .modal-content {
+      background: #3957b3;
+      color: #fff;
+      border-radius: 18px;
+      padding: 30px 18px 20px;
+    }
+    .modal-header {
+      border-bottom: none;
+      position: relative;
+    }
+    .modal-header .btn-close {
+      filter: invert(1);
+      opacity: .8;
+      position: absolute;
+      right: 6px; top: 8px;
+    }
+    .addtask-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 2px solid #7ebaff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px auto;
+      font-size: 1.8em;
+    }
+    .form-label { color: #93bbf5; font-weight: 500;}
+    .form-control, .form-select {
+      background: rgba(255,255,255,0.13)!important;
+      color: #fff !important;
+      border: 1.2px solid #7ebaff;
+      border-radius: 7px;
+      margin-bottom: 13px;
+    }
+    .form-control::placeholder { color: #c6d6fa;}
+    .form-control:focus, .form-select:focus { border-color: #45c9f6; box-shadow: 0 0 0 2px #a0dfff33;}
+    .add-btn {
+      width: 100%;
+      background: #45c9f6;
+      border: none;
+      padding: 11px 0;
+      font-size: 1.12em;
+      font-weight: bold;
+      border-radius: 7px;
+      color: #fff;
+      margin-top: 6px;
+      transition: background .18s;
+    }
+    .add-btn:active { background: #289cd4;}
+    /* Responsive */
+    @media (max-width: 600px) {
+      .container, .card-glass { border-radius: 0;}
+      .header-img { height: 110px;}
+      .fab { width: 46px; height: 46px; font-size: 1.7em; bottom: -21px;}
+      .modal-content {border-radius: 12px; padding: 18px 6px 14px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="container p-0 mt-2" style="max-width: 430px;">
+    <!-- Card Main -->
+    <div class="card-glass position-relative">
+      <!-- Header with image and overlay -->
+      <div class="header-img">
+        <div class="header-overlay">
+          <div class="header-title">Your Things</div>
+          <div class="header-detail">Sep 5, 2015</div>
+          <div class="stats">
+            <span>24 Personal</span>
+            <span>15 Business</span>
+            <span style="margin-left:auto;">65% done</span>
+          </div>
+          <div class="progress-bar mt-1 w-100">
+            <div class="progress-bar-inner"></div>
+          </div>
+        </div>
+      </div>
+      <!-- Inbox List -->
+      <div class="px-3 pt-4 pb-3">
+        <div class="d-flex align-items-center mb-1" style="color:#7a88ad;font-size:.98em;">
+          <span class="me-2 uk-icon" uk-icon="icon: inbox"></span>
+          <span class="fw-bold">INBOX</span>
+        </div>
+        <ul class="inbox-list">
+          <li>
+            <span class="task-circle"><span uk-icon="icon: calendar"></span></span>
+            <div>
+              <div class="task-title">Boglioli suit fitting</div>
+              <div class="task-desc">Linnégatan 2, Gothenburg</div>
+            </div>
+            <span class="task-time ms-auto">9am</span>
+          </li>
+          <li>
+            <span class="task-circle"><span uk-icon="icon: file-text"></span></span>
+            <div>
+              <div class="task-title">Final design delivery</div>
+              <div class="task-desc">Inuse Experience, Gothenburg</div>
+            </div>
+            <span class="task-time">11am</span>
+            <div class="avatar-group ms-2">
+              <img src="https://randomuser.me/api/portraits/men/11.jpg" class="avatar" alt="user1">
+              <img src="https://randomuser.me/api/portraits/women/8.jpg" class="avatar" alt="user2">
+            </div>
+          </li>
+          <li>
+            <span class="task-circle"><span uk-icon="icon: future"></span></span>
+            <div>
+              <div class="task-title">Lunch run meeting</div>
+              <div class="task-desc">Trädgårdsgatan, Gothenburg</div>
+            </div>
+            <span class="task-time">12am</span>
+          </li>
+          <li>
+            <span class="task-circle"><span uk-icon="icon: music"></span></span>
+            <div>
+              <div class="task-title">Record techno mixtape</div>
+              <div class="task-desc">Klockwork Studios, Stockholm</div>
+            </div>
+            <span class="task-time">7pm</span>
+          </li>
+        </ul>
+        <div class="d-flex align-items-center mt-3" style="color:#7a88ad;font-size:.98em;">
+          <span class="me-2 uk-icon" uk-icon="icon: check"></span>
+          <span class="fw-bold">COMPLETED</span>
+          <span class="ms-2 badge bg-secondary rounded-pill">5</span>
+        </div>
+      </div>
+      <!-- Floating Action Button -->
+      <button class="fab" type="button" data-bs-toggle="modal" data-bs-target="#addTaskModal">
+        <span uk-icon="icon: plus"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Add Task Modal -->
+  <div class="modal fade" id="addTaskModal" tabindex="-1" aria-labelledby="addTaskModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0 pb-0">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+        </div>
+        <div class="addtask-icon mb-2">
+          <span uk-icon="icon: bolt"></span>
+        </div>
+        <h5 class="mb-2 text-center" style="font-weight:500;">Add new thing</h5>
+        <form>
+          <label class="form-label">Business <span class="text-danger">*</span></label>
+          <select class="form-select mb-2">
+            <option selected>Business</option>
+            <option>Personal</option>
+          </select>
+          <label class="form-label">Thing</label>
+          <input type="text" class="form-control" placeholder="Enter task..." value="Sketch workshop">
+          <label class="form-label">Place</label>
+          <input type="text" class="form-control" placeholder="Add place (optional)">
+          <label class="form-label">Time</label>
+          <input type="text" class="form-control" placeholder="Add time (optional)">
+          <label class="form-label">Notification</label>
+          <input type="text" class="form-control" placeholder="Add notification (optional)">
+          <button type="submit" class="add-btn mt-2">ADD YOUR THING</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS, UIkit Icons -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.12/dist/js/uikit.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.12/dist/js/uikit-icons.min.js"></script>
+</body>
+</html>

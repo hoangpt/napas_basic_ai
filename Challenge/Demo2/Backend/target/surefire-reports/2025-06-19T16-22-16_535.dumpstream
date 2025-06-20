@@ -1,0 +1,5 @@
+# Created at 2025-06-19T16:22:18.206
+Boot Manifest-JAR contains absolute paths in classpath 'D:\Training\napas_basic_ai\Challenge\Demo2\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+'other' has different root
+
